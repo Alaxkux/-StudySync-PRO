@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>StudySync Pro — AI Student Platform</title>
+  <meta name="description" content="Premium AI-powered student problem solving platform"/>
+  <meta name="theme-color" content="#0f0e1a"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     ANIMATED BACKGROUND
+══════════════════════════════════════ -->
+<div class="bg-mesh" aria-hidden="true">
+  <div class="bg-orb bg-orb--1"></div>
+  <div class="bg-orb bg-orb--2"></div>
+  <div class="bg-orb bg-orb--3"></div>
+  <div class="bg-orb bg-orb--4"></div>
+  <div class="bg-grid"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     ONBOARDING
+══════════════════════════════════════ -->
+<div id="onboarding" class="onboarding-screen">
+  <div class="ob-step active" id="ob-1">
+    <div class="ob-card glass-card">
+      <div class="ob-logo"><span class="logo-gem"></span><span>StudySync</span><span class="ob-pro-tag">PRO</span></div>
+      <div class="ob-progress-bar"><div class="ob-prog-fill" style="width:33%"></div></div>
+      <p class="ob-step-num">Step 1 of 3</p>
+      <h1 class="ob-headline">What level are you<br/><em>studying at?</em></h1>
+      <div class="ob-grid ob-grid--2">
+        <button class="ob-opt" data-key="level" data-val="highschool"><span class="ob-opt-emoji">🏫</span><strong>High School</strong><span>Secondary / A-levels</span></button>
+        <button class="ob-opt" data-key="level" data-val="undergraduate"><span class="ob-opt-emoji">🎓</span><strong>Undergraduate</strong><span>Bachelor's degree</span></button>
+        <button class="ob-opt" data-key="level" data-val="postgraduate"><span class="ob-opt-emoji">🔬</span><strong>Postgraduate</strong><span>Masters / PhD</span></button>
+        <button class="ob-opt" data-key="level" data-val="professional"><span class="ob-opt-emoji">💼</span><strong>Professional</strong><span>Certification / Course</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ob-step" id="ob-2">
+    <div class="ob-card glass-card">
+      <div class="ob-logo"><span class="logo-gem"></span><span>StudySync</span><span class="ob-pro-tag">PRO</span></div>
+      <div class="ob-progress-bar"><div class="ob-prog-fill" style="width:66%"></div></div>
+      <p class="ob-step-num">Step 2 of 3</p>
+      <h1 class="ob-headline">What are your<br/><em>biggest struggles?</em></h1>
+      <p class="ob-hint">Pick all that apply</p>
+      <div class="ob-grid ob-grid--2 ob-multi">
+        <button class="ob-opt ob-opt--multi" data-key="struggles" data-val="academic">📚 Understanding coursework</button>
+        <button class="ob-opt ob-opt--multi" data-key="struggles" data-val="time">⏰ Time management</button>
+        <button class="ob-opt ob-opt--multi" data-key="struggles" data-val="exams">📝 Exam preparation</button>
+        <button class="ob-opt ob-opt--multi" data-key="struggles" data-val="finance">💸 Financial stress</button>
+        <button class="ob-opt ob-opt--multi" data-key="struggles" data-val="mental">🧠 Mental burnout</button>
+        <button class="ob-opt ob-opt--multi" data-key="struggles" data-val="career">🎯 Career direction</button>
+        <button class="ob-opt ob-opt--multi" data-key="struggles" data-val="social">👥 Social / group work</button>
+        <button class="ob-opt ob-opt--multi" data-key="struggles" data-val="study">🔬 Study techniques</button>
+      </div>
+      <button class="ob-continue-btn" id="ob-continue-2">Continue →</button>
+    </div>
+  </div>
+
+  <div class="ob-step" id="ob-3">
+    <div class="ob-card glass-card">
+      <div class="ob-logo"><span class="logo-gem"></span><span>StudySync</span><span class="ob-pro-tag">PRO</span></div>
+      <div class="ob-progress-bar"><div class="ob-prog-fill" style="width:100%"></div></div>
+      <p class="ob-step-num">Step 3 of 3</p>
+      <h1 class="ob-headline">What's your<br/><em>field of study?</em></h1>
+      <div class="ob-grid ob-grid--2">
+        <button class="ob-opt" data-key="field" data-val="engineering">⚙️ Engineering & Tech</button>
+        <button class="ob-opt" data-key="field" data-val="medicine">❤️ Medicine & Health</button>
+        <button class="ob-opt" data-key="field" data-val="business">📈 Business & Finance</button>
+        <button class="ob-opt" data-key="field" data-val="science">🔬 Pure Sciences</button>
+        <button class="ob-opt" data-key="field" data-val="arts">🎨 Arts & Humanities</button>
+        <button class="ob-opt" data-key="field" data-val="law">⚖️ Law & Social Sciences</button>
+        <button class="ob-opt" data-key="field" data-val="education">📖 Education</button>
+        <button class="ob-opt" data-key="field" data-val="other">🌍 Other</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MAIN APP
+══════════════════════════════════════ -->
+<div id="app" class="app hidden">
+
+  <!-- FLOATING NAVBAR -->
+  <nav class="navbar glass-nav" id="navbar">
+    <div class="nav-left">
+      <button class="nav-logo" id="nav-logo-btn">
+        <span class="logo-gem"></span>
+        <span class="logo-name">StudySync</span>
+        <span class="logo-pro">PRO</span>
+      </button>
+    </div>
+
+    <div class="nav-center" id="nav-links">
+      <button class="nav-link active" data-screen="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-link" data-screen="solver">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        AI Solver
+      </button>
+      <button class="nav-link" data-screen="tools">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Study Tools
+      </button>
+      <button class="nav-link" data-screen="planner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Planner
+      </button>
+      <button class="nav-link" data-screen="leaderboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        Leaderboard
+      </button>
+      <button class="nav-link" data-screen="community">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Community
+      </button>
+    </div>
+
+    <div class="nav-right">
+      <button class="nav-search-btn" id="nav-search-btn" title="Search (Ctrl+K)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <kbd>⌘K</kbd>
+      </button>
+      <div class="nav-xp-badge" id="nav-xp">
+        <span>🔥</span><span id="nav-streak">0</span>
+        <span class="xp-dot">·</span>
+        <span id="nav-xp-val">0 XP</span>
+      </div>
+      <button class="nav-theme-btn" id="theme-btn" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="nav-avatar" id="nav-avatar-btn" data-screen="profile">S</button>
+      <button class="nav-hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-drawer glass-card" id="mobile-drawer">
+    <button class="drawer-close" id="drawer-close">✕</button>
+    <div class="drawer-logo"><span class="logo-gem"></span>StudySync <span class="logo-pro">PRO</span></div>
+    <nav class="drawer-nav" id="drawer-nav"></nav>
+    <div class="drawer-bottom">
+      <div class="drawer-xp" id="drawer-xp"></div>
+    </div>
+  </div>
+  <div class="drawer-overlay hidden" id="drawer-overlay"></div>
+
+  <!-- ── SCREENS ─────────────────────── -->
+
+  <!-- DASHBOARD -->
+  <div class="screen active" id="screen-dashboard">
+    <div class="screen-inner">
+
+      <!-- Hero -->
+      <div class="dash-hero">
+        <div class="dash-hero-text">
+          <p class="dash-greeting" id="dash-greeting">Good morning 👋</p>
+          <h1 class="dash-headline">What's your <em>problem today?</em></h1>
+          <p class="dash-sub">Type anything — AI will diagnose and solve it instantly.</p>
+          <div class="hero-input-wrap">
+            <textarea id="hero-input" class="hero-input glass-input" placeholder="e.g. I have 3 exams next week and I don't know where to start…" rows="2"></textarea>
+            <div class="hero-input-actions">
+              <div class="hero-mode-pills">
+                <button class="mode-pill active" data-mode="quickfix">⚡ Quick Fix</button>
+                <button class="mode-pill" data-mode="deepdive">🔍 Deep Dive</button>
+                <button class="mode-pill" data-mode="emergency">🚨 Emergency</button>
+              </div>
+              <button class="hero-solve-btn glow-btn" id="hero-solve-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Solve It
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="dash-hero-stats">
+          <div class="stat-glass-card" id="sg-solved">
+            <span class="sgc-icon">✅</span>
+            <span class="sgc-num" id="sg-num-solved">0</span>
+            <span class="sgc-lbl">Problems Solved</span>
+          </div>
+          <div class="stat-glass-card stat-glass-card--purple" id="sg-streak">
+            <span class="sgc-icon">🔥</span>
+            <span class="sgc-num" id="sg-num-streak">0</span>
+            <span class="sgc-lbl">Day Streak</span>
+          </div>
+          <div class="stat-glass-card" id="sg-xp">
+            <span class="sgc-icon">⚡</span>
+            <span class="sgc-num" id="sg-num-xp">0</span>
+            <span class="sgc-lbl">Total XP</span>
+          </div>
+          <div class="stat-glass-card stat-glass-card--gold" id="sg-level">
+            <span class="sgc-icon">🎓</span>
+            <span class="sgc-num sgc-num--sm" id="sg-num-level">Freshman</span>
+            <span class="sgc-lbl">Your Level</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- XP Progress -->
+      <div class="xp-progress-row">
+        <div class="xp-progress-card glass-card">
+          <div class="xpc-left">
+            <span id="xpc-level">Freshman</span>
+            <span class="xpc-sep">→</span>
+            <span id="xpc-next">Sophomore</span>
+          </div>
+          <div class="xpc-bar-wrap">
+            <div class="xpc-bar"><div class="xpc-fill" id="xpc-fill"></div></div>
+          </div>
+          <div class="xpc-right" id="xpc-remaining">500 XP to go</div>
+        </div>
+      </div>
+
+      <!-- Daily Challenges -->
+      <section class="dash-section">
+        <div class="section-header">
+          <h2 class="section-title">🎯 Daily Challenges</h2>
+          <span class="section-badge" id="challenges-badge">0/3</span>
+        </div>
+        <div class="challenges-row" id="challenges-row"></div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="dash-section">
+        <h2 class="section-title">⚡ Quick Actions</h2>
+        <div class="quick-actions-grid">
+          <button class="qa-card glass-card" data-screen="solver">
+            <span class="qa-icon">🤖</span>
+            <strong>Ask AI</strong>
+            <span>Get instant solutions</span>
+          </button>
+          <button class="qa-card glass-card" data-action="flashcards">
+            <span class="qa-icon">🃏</span>
+            <strong>Flashcards</strong>
+            <span>AI-generated cards</span>
+          </button>
+          <button class="qa-card glass-card" data-action="quiz">
+            <span class="qa-icon">📝</span>
+            <strong>Quiz Me</strong>
+            <span>Test your knowledge</span>
+          </button>
+          <button class="qa-card glass-card" data-screen="planner">
+            <span class="qa-icon">📅</span>
+            <strong>Study Plan</strong>
+            <span>7/14/30 day plans</span>
+          </button>
+          <button class="qa-card glass-card" data-screen="tools">
+            <span class="qa-icon">🍅</span>
+            <strong>Pomodoro</strong>
+            <span>Focus timer</span>
+          </button>
+          <button class="qa-card glass-card" data-screen="profile">
+            <span class="qa-icon">🏆</span>
+            <strong>My Profile</strong>
+            <span>Badges & progress</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Categories -->
+      <section class="dash-section">
+        <h2 class="section-title">📚 Browse by Category</h2>
+        <div class="cat-grid">
+          <button class="cat-glass-card" data-cat="academic"><span>📚</span><strong>Academic</strong><p>Coursework, exams, concepts</p></button>
+          <button class="cat-glass-card" data-cat="time"><span>⏰</span><strong>Time Management</strong><p>Deadlines, scheduling, balance</p></button>
+          <button class="cat-glass-card" data-cat="finance"><span>💸</span><strong>Finance</strong><p>Budget, scholarships, income</p></button>
+          <button class="cat-glass-card" data-cat="mental"><span>🧠</span><strong>Mental Health</strong><p>Burnout, anxiety, wellness</p></button>
+          <button class="cat-glass-card" data-cat="career"><span>🎯</span><strong>Career</strong><p>CV, interviews, direction</p></button>
+          <button class="cat-glass-card" data-cat="social"><span>👥</span><strong>Social</strong><p>Group work, campus life</p></button>
+        </div>
+      </section>
+
+      <!-- Recent Activity & Wins -->
+      <div class="dash-bottom-grid">
+        <section class="dash-section">
+          <h2 class="section-title">📋 Recent Activity</h2>
+          <div id="recent-activity" class="activity-list"></div>
+        </section>
+        <section class="dash-section">
+          <h2 class="section-title">🏆 Community Wins</h2>
+          <div class="wins-list" id="wins-list">
+            <div class="win-item glass-card"><span>👩‍💻</span><p>"Finally passed Calculus using the Emergency Mode plan!"</p><span class="win-xp">+50 XP</span></div>
+            <div class="win-item glass-card"><span>👨‍🎓</span><p>"Got a $5,000 scholarship using the finance tools!"</p><span class="win-xp">+100 XP</span></div>
+            <div class="win-item glass-card"><span>👩‍🔬</span><p>"Landed internship after the CV generator session!"</p><span class="win-xp">+75 XP</span></div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AI SOLVER -->
+  <div class="screen" id="screen-solver">
+    <div class="screen-inner screen-inner--solver">
+      <div class="solver-panel glass-card">
+        <h2 class="panel-title">✦ AI Problem Solver</h2>
+        <p class="panel-sub">Describe your problem — AI diagnoses and gives you a real action plan.</p>
+
+        <div class="solver-modes" id="solver-modes">
+          <button class="smode-btn active" data-mode="quickfix"><span>⚡</span><div><strong>Quick Fix</strong><small>Fast solution</small></div></button>
+          <button class="smode-btn" data-mode="deepdive"><span>🔍</span><div><strong>Deep Dive</strong><small>Full roadmap</small></div></button>
+          <button class="smode-btn smode-btn--emergency" data-mode="emergency"><span>🚨</span><div><strong>Emergency</strong><small>Exam in hours</small></div></button>
+        </div>
+
+        <!-- Solve modes (simplify / step-by-step / practice) -->
+        <div class="solve-style-row">
+          <span class="ssr-label">Style:</span>
+          <button class="ssr-btn active" data-solve-mode="normal">Normal</button>
+          <button class="ssr-btn" data-solve-mode="simplify">ELI5</button>
+          <button class="ssr-btn" data-solve-mode="stepbystep">Step-by-Step</button>
+        </div>
+
+        <textarea id="solver-input" class="solver-textarea glass-input" placeholder="Describe your problem here…" rows="5"></textarea>
+
+        <div class="emergency-extras hidden" id="em-extras">
+          <div class="em-row">
+            <div class="em-field"><label>Subject</label><input id="em-subject" class="glass-input" type="text" placeholder="e.g. Calculus"/></div>
+            <div class="em-field"><label>Hours left</label><input id="em-hours" class="glass-input" type="number" placeholder="6" min="1" max="48"/></div>
+            <div class="em-field"><label>Exam weight (%)</label><input id="em-weight" class="glass-input" type="number" placeholder="40" min="1" max="100"/></div>
+          </div>
+        </div>
+
+        <button class="solve-main-btn glow-btn" id="solve-main-btn">
+          <span id="smb-text">✦ Solve My Problem</span>
+          <span id="smb-loading" class="hidden"><span class="loading-dots"><span></span><span></span><span></span></span> Thinking…</span>
+        </button>
+      </div>
+
+      <div class="solution-area" id="solution-area">
+        <div class="solution-placeholder" id="solution-placeholder">
+          <div class="sp-icon">✦</div>
+          <h3>Your solution appears here</h3>
+          <p>Describe your problem and hit Solve — AI gives you a structured diagnosis and action plan.</p>
+          <div class="sp-tips">
+            <div class="sp-tip"><strong>⚡ Quick Fix</strong> Instant diagnosis for simple problems</div>
+            <div class="sp-tip"><strong>🔍 Deep Dive</strong> Full strategic roadmap for complex issues</div>
+            <div class="sp-tip"><strong>🚨 Emergency</strong> Exam in hours? Minute-by-minute plan</div>
+          </div>
+        </div>
+        <div id="solution-output" class="hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDY TOOLS -->
+  <div class="screen" id="screen-tools">
+    <div class="screen-inner">
+      <div class="page-header">
+        <h1 class="page-title">🛠 Study Tools</h1>
+        <p class="page-sub">Specialized tools for every aspect of student life.</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tools-tabs" id="tools-tabs">
+        <button class="tools-tab active" data-tool="pomodoro">🍅 Pomodoro</button>
+        <button class="tools-tab" data-tool="flashcards">🃏 Flashcards</button>
+        <button class="tools-tab" data-tool="quiz">📝 Quiz</button>
+        <button class="tools-tab" data-tool="budget">💸 Budget</button>
+        <button class="tools-tab" data-tool="burnout">🧠 Burnout</button>
+        <button class="tools-tab" data-tool="deadlines">📅 Deadlines</button>
+        <button class="tools-tab" data-tool="cv">📄 CV</button>
+      </div>
+
+      <!-- Pomodoro -->
+      <div class="tool-pane active" id="tool-pomodoro">
+        <div class="tool-center-card glass-card">
+          <div class="pom-ring-wrap">
+            <svg class="pom-ring" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="54" class="pom-ring-bg"/>
+              <circle cx="60" cy="60" r="54" class="pom-ring-fill" id="pom-ring-fill"/>
+            </svg>
+            <div class="pom-center">
+              <div class="pom-time" id="pom-time">25:00</div>
+              <div class="pom-label" id="pom-label">Focus</div>
+            </div>
+          </div>
+          <div class="pom-controls">
+            <button class="pom-btn-main glow-btn" id="pom-start">▶ Start</button>
+            <button class="pom-btn-ghost" id="pom-reset">↺ Reset</button>
+          </div>
+          <div class="pom-sessions-row">
+            <span id="pom-session-dots"></span>
+            <span class="pom-session-num">Session <span id="pom-snum">1</span>/4</span>
+          </div>
+          <div class="pom-study-time">Today: <strong id="pom-today">0 min</strong></div>
+        </div>
+      </div>
+
+      <!-- Flashcards -->
+      <div class="tool-pane" id="tool-flashcards">
+        <div class="fc-generator glass-card">
+          <h3>Generate AI Flashcards</h3>
+          <input id="fc-topic" class="glass-input" type="text" placeholder="Topic e.g. 'Photosynthesis', 'Newton's Laws'"/>
+          <textarea id="fc-notes" class="glass-input" placeholder="Paste your notes (optional)…" rows="3"></textarea>
+          <button class="glow-btn" id="fc-generate-btn">🃏 Generate Flashcards</button>
+        </div>
+        <div class="fc-deck hidden" id="fc-deck">
+          <div class="fc-progress-row">
+            <span id="fc-counter">1 / 8</span>
+            <div class="fc-prog-bar"><div class="fc-prog-fill" id="fc-prog-fill"></div></div>
+            <span id="fc-mastery">0% mastered</span>
+          </div>
+          <div class="fc-card-wrap">
+            <div class="fc-card" id="fc-card">
+              <div class="fc-front" id="fc-front">Click to flip</div>
+              <div class="fc-back hidden" id="fc-back">Back</div>
+            </div>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-btn fc-btn--prev" id="fc-prev">← Prev</button>
+            <button class="fc-btn fc-btn--flip" id="fc-flip">🔄 Flip</button>
+            <button class="fc-btn fc-btn--know" id="fc-know">✓ Got it</button>
+            <button class="fc-btn fc-btn--next" id="fc-next">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz -->
+      <div class="tool-pane" id="tool-quiz">
+        <div class="quiz-setup glass-card" id="quiz-setup">
+          <h3>🎯 AI Quiz Generator</h3>
+          <input id="quiz-topic" class="glass-input" type="text" placeholder="Topic e.g. 'World War II', 'Calculus derivatives'"/>
+          <div class="quiz-options-row">
+            <div class="quiz-opt-group">
+              <label>Difficulty</label>
+              <select id="quiz-diff" class="glass-input">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+            <div class="quiz-opt-group">
+              <label>Questions</label>
+              <select id="quiz-count" class="glass-input">
+                <option value="3">3</option>
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+          </div>
+          <button class="glow-btn" id="quiz-generate-btn">📝 Generate Quiz</button>
+        </div>
+        <div class="quiz-active hidden" id="quiz-active"></div>
+        <div class="quiz-results hidden" id="quiz-results"></div>
+      </div>
+
+      <!-- Budget -->
+      <div class="tool-pane" id="tool-budget">
+        <div class="budget-card glass-card">
+          <h3>💸 Student Budget Planner</h3>
+          <div class="budget-fields">
+            <div class="bf-row"><label>Monthly Income</label><input id="b-income" class="glass-input" type="number" placeholder="0"/></div>
+            <div class="bf-row"><label>Rent / Housing</label><input id="b-rent" class="glass-input" type="number" placeholder="0"/></div>
+            <div class="bf-row"><label>Food & Dining</label><input id="b-food" class="glass-input" type="number" placeholder="0"/></div>
+            <div class="bf-row"><label>Transport</label><input id="b-transport" class="glass-input" type="number" placeholder="0"/></div>
+            <div class="bf-row"><label>Books & Supplies</label><input id="b-books" class="glass-input" type="number" placeholder="0"/></div>
+            <div class="bf-row"><label>Entertainment</label><input id="b-fun" class="glass-input" type="number" placeholder="0"/></div>
+          </div>
+          <button class="glow-btn" id="b-calc-btn">Calculate Budget</button>
+          <div id="b-result" class="budget-result hidden"></div>
+        </div>
+      </div>
+
+      <!-- Burnout -->
+      <div class="tool-pane" id="tool-burnout">
+        <div class="burnout-card glass-card" id="burnout-card">
+          <h3>🧠 Burnout Detector</h3>
+          <p>5 questions to assess your mental wellbeing.</p>
+          <button class="glow-btn" id="burnout-start-btn">Check My Burnout Level</button>
+        </div>
+      </div>
+
+      <!-- Deadlines -->
+      <div class="tool-pane" id="tool-deadlines">
+        <div class="deadlines-card glass-card">
+          <h3>📅 Deadline Tracker</h3>
+          <div class="dl-add-row">
+            <input id="dl-task" class="glass-input" type="text" placeholder="Assignment / Exam name…"/>
+            <input id="dl-date" class="glass-input" type="date"/>
+            <button class="glow-btn" id="dl-add-btn">+ Add</button>
+          </div>
+          <div id="dl-list" class="dl-list"></div>
+        </div>
+      </div>
+
+      <!-- CV -->
+      <div class="tool-pane" id="tool-cv">
+        <div class="cv-card glass-card">
+          <h3>📄 CV Bullet Generator</h3>
+          <p>Describe your experience — AI turns it into professional CV bullets.</p>
+          <textarea id="cv-exp" class="glass-input" placeholder="e.g. I ran our university coding club and organised 3 hackathons with 50+ participants…" rows="4"></textarea>
+          <button class="glow-btn" id="cv-gen-btn">✦ Generate CV Bullets</button>
+          <div id="cv-result" class="cv-result hidden"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STUDY PLANNER -->
+  <div class="screen" id="screen-planner">
+    <div class="screen-inner">
+      <div class="page-header">
+        <h1 class="page-title">📅 AI Study Planner</h1>
+        <p class="page-sub">Generate a personalized day-by-day study plan.</p>
+      </div>
+      <div class="planner-layout">
+        <div class="planner-form glass-card" id="planner-form">
+          <div class="pf-field"><label>Course / Subject</label><input id="pf-course" class="glass-input" type="text" placeholder="e.g. Calculus, World History"/></div>
+          <div class="pf-field"><label>Topics to cover</label><textarea id="pf-topics" class="glass-input" rows="3" placeholder="e.g. Derivatives, Integrals, Series…"></textarea></div>
+          <div class="pf-field"><label>Exam Date</label><input id="pf-date" class="glass-input" type="date"/></div>
+          <div class="pf-field">
+            <label>Plan Length</label>
+            <div class="plan-len-row">
+              <button class="plan-len-btn active" data-days="7">7 Days</button>
+              <button class="plan-len-btn" data-days="14">14 Days</button>
+              <button class="plan-len-btn" data-days="30">30 Days</button>
+            </div>
+          </div>
+          <button class="glow-btn" id="planner-gen-btn">📅 Generate My Plan</button>
+        </div>
+        <div class="planner-output" id="planner-output">
+          <div class="planner-placeholder glass-card">
+            <span>📅</span>
+            <p>Fill in your course details and generate a personalized study plan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div class="screen" id="screen-leaderboard">
+    <div class="screen-inner">
+      <div class="page-header">
+        <h1 class="page-title">🏆 Leaderboard</h1>
+        <p class="page-sub">Top students this week.</p>
+      </div>
+      <div class="lb-layout">
+        <div class="lb-tabs">
+          <button class="lb-tab active" data-lb="xp">⚡ Top XP</button>
+          <button class="lb-tab" data-lb="streak">🔥 Streaks</button>
+          <button class="lb-tab" data-lb="solved">✅ Problems Solved</button>
+        </div>
+        <div class="lb-podium" id="lb-podium"></div>
+        <div class="lb-list" id="lb-list"></div>
+        <div class="lb-your-rank glass-card" id="lb-your-rank"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMUNITY -->
+  <div class="screen" id="screen-community">
+    <div class="screen-inner">
+      <div class="page-header">
+        <h1 class="page-title">👥 Study Hall</h1>
+        <p class="page-sub">Post a problem. Get community + AI answers.</p>
+      </div>
+      <div class="comm-layout">
+        <div class="comm-main">
+          <div class="comm-post-card glass-card">
+            <textarea id="comm-input" class="glass-input" placeholder="Post your problem anonymously…" rows="3"></textarea>
+            <button class="glow-btn" id="comm-post-btn">Post to Community</button>
+          </div>
+          <div id="comm-feed" class="comm-feed">
+            <div class="comm-placeholder glass-card"><p>Post a problem to get community perspectives and AI synthesis.</p></div>
+          </div>
+        </div>
+        <div class="comm-sidebar">
+          <div class="glass-card comm-sidebar-card">
+            <h3>🏆 Top Helpers</h3>
+            <div class="lb-mini" id="comm-lb"></div>
+          </div>
+          <div class="glass-card comm-sidebar-card">
+            <h3>🔥 Trending Topics</h3>
+            <div class="trending-list" id="trending-list">
+              <div class="trend-item"><span>📚</span><span>"How to study smarter not harder"</span><span class="trend-votes">247</span></div>
+              <div class="trend-item"><span>💸</span><span>"Managing money as a student"</span><span class="trend-votes">189</span></div>
+              <div class="trend-item"><span>😩</span><span>"Dealing with exam anxiety"</span><span class="trend-votes">156</span></div>
+              <div class="trend-item"><span>🎯</span><span>"Career after graduation?"</span><span class="trend-votes">134</span></div>
+            </div>
+          </div>
+          <div class="glass-card comm-sidebar-card">
+            <h3>📚 Study Groups</h3>
+            <div class="study-groups">
+              <button class="sg-btn">CSC 💻</button>
+              <button class="sg-btn">MTH 📐</button>
+              <button class="sg-btn">PHY ⚛️</button>
+              <button class="sg-btn">BIO 🧬</button>
+              <button class="sg-btn">ENG 📝</button>
+              <button class="sg-btn">GST 🌍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div class="screen" id="screen-profile">
+    <div class="screen-inner">
+      <div class="profile-layout">
+        <div class="profile-card glass-card">
+          <div class="profile-avatar" id="profile-avatar">S</div>
+          <h2 class="profile-name" id="profile-name">Student</h2>
+          <p class="profile-level" id="profile-level-text">Freshman</p>
+          <div class="profile-stats-row">
+            <div class="ps-item"><strong id="ps-xp">0</strong><span>XP</span></div>
+            <div class="ps-item"><strong id="ps-streak">0</strong><span>Streak</span></div>
+            <div class="ps-item"><strong id="ps-solved">0</strong><span>Solved</span></div>
+          </div>
+          <div class="profile-xp-bar">
+            <div class="profile-xp-fill" id="profile-xp-fill"></div>
+          </div>
+          <p class="profile-xp-label" id="profile-xp-label">500 XP to Sophomore</p>
+        </div>
+
+        <div class="profile-right">
+          <div class="glass-card profile-section">
+            <h3>🎖 Achievements</h3>
+            <div class="achievements-grid" id="achievements-grid"></div>
+          </div>
+          <div class="glass-card profile-section">
+            <h3>📋 Saved Items</h3>
+            <div id="saved-list" class="saved-list">
+              <p class="empty-state-sm">No saved items yet. Click ★ on any solution to save it.</p>
+            </div>
+          </div>
+          <div class="glass-card profile-section">
+            <h3>⚙️ Settings</h3>
+            <div class="settings-list">
+              <div class="settings-row">
+                <span>Theme</span>
+                <div class="theme-toggle-row">
+                  <button class="theme-opt active" data-theme="dark">🌙 Dark</button>
+                  <button class="theme-opt" data-theme="light">☀️ Light</button>
+                </div>
+              </div>
+              <div class="settings-row">
+                <span>Reset Progress</span>
+                <button class="settings-danger-btn" id="reset-btn">Reset All Data</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="bn-btn active" data-screen="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="bn-btn" data-screen="solver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>Solver</span>
+    </button>
+    <button class="bn-btn" data-screen="tools">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      <span>Tools</span>
+    </button>
+    <button class="bn-btn" data-screen="leaderboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      <span>Leaders</span>
+    </button>
+    <button class="bn-btn" data-screen="profile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </button>
+  </nav>
+
+</div><!-- /app -->
+
+<!-- COMMAND PALETTE (Ctrl+K) -->
+<div class="cmd-palette-bg hidden" id="cmd-bg">
+  <div class="cmd-palette glass-card">
+    <div class="cmd-search-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="cmd-input" class="cmd-input" type="text" placeholder="Search or type a command…" autocomplete="off"/>
+      <kbd class="cmd-esc">ESC</kbd>
+    </div>
+    <div class="cmd-results" id="cmd-results"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LEVEL UP -->
+<div class="levelup-screen hidden" id="levelup-screen">
+  <div class="levelup-card glass-card">
+    <div class="levelup-confetti" id="levelup-confetti"></div>
+    <div class="levelup-emoji">🎉</div>
+    <h2>Level Up!</h2>
+    <p id="levelup-text">You are now a Sophomore</p>
+    <button class="glow-btn" id="levelup-close">Keep Going →</button>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/gami.js"></script>
+<script src="js/solver.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/planner.js"></script>
+<script src="js/leaderboard.js"></script>
+<script src="js/community.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
